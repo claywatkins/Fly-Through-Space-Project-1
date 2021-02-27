@@ -9,7 +9,7 @@
 import SpriteKit
 
 @objcMembers
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     // Adding the player
     let player = SKSpriteNode(imageNamed: "player-rocket.png")
     var touchingPlayer = false
@@ -39,6 +39,7 @@ class GameScene: SKScene {
         player.physicsBody?.categoryBitMask = 1
         
         gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
+        physicsWorld.contactDelegate = self
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -81,5 +82,21 @@ class GameScene: SKScene {
         sprite.physicsBody?.categoryBitMask = 0
         sprite.physicsBody?.contactTestBitMask = 1
     }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        guard let nodeA = contact.bodyA.node else { return }
+        guard let nodeB = contact.bodyB.node else { return }
+        
+        if nodeA == player {
+            playerHit(nodeB)
+        } else {
+            playerHit(nodeA)
+        }
+    }
+    
+    func playerHit(_ node: SKNode) {
+        player.removeFromParent()
+    }
+    
 }
 
