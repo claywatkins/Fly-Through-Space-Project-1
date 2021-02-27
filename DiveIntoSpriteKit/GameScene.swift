@@ -35,6 +35,9 @@ class GameScene: SKScene {
         player.zPosition = 1
         addChild(player)
         
+        player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
+        player.physicsBody?.categoryBitMask = 1
+        
         gameTimer = Timer.scheduledTimer(timeInterval: 0.35, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
 
@@ -75,6 +78,8 @@ class GameScene: SKScene {
         sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
         sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
         sprite.physicsBody?.linearDamping = 0
+        sprite.physicsBody?.categoryBitMask = 0
+        sprite.physicsBody?.contactTestBitMask = 1
     }
 }
 
