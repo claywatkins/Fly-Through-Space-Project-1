@@ -18,6 +18,7 @@ class GameScene: SKScene {
         
         // Adding particle effect
         if let particles = SKEmitterNode(fileNamed: "SpaceDust"){
+            particles.advanceSimulationTime(10)
             particles.position.x = 512
             addChild(particles)
         }
