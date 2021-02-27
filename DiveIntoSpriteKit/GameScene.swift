@@ -15,6 +15,12 @@ class GameScene: SKScene {
         let background = SKSpriteNode(imageNamed: "space.jpg")
         background.zPosition = -1
         addChild(background)
+        
+        // Adding particle effect
+        if let particles = SKEmitterNode(fileNamed: "SpaceDust"){
+            particles.position.x = 512
+            addChild(particles)
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
