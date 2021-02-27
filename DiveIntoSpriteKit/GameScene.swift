@@ -13,6 +13,7 @@ class GameScene: SKScene {
     // Adding the player
     let player = SKSpriteNode(imageNamed: "player-rocket.png")
     var touchingPlayer = false
+    var gameTimer: Timer?
     
     override func didMove(to view: SKView) {
         // this method is called when your game scene is ready to run
@@ -62,6 +63,10 @@ class GameScene: SKScene {
 
     override func update(_ currentTime: TimeInterval) {
         // this method is called before each frame is rendered
+    }
+    
+    func createEnemy() {
+        
     }
 }
 
